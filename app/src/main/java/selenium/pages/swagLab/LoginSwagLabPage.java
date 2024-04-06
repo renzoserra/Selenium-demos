@@ -13,7 +13,7 @@ public class LoginSwagLabPage extends BasePage {
     @FindBy(xpath = "//input[@data-test=\"username\"]")
     private WebElement usernameInput;
 
-    @FindBy(xpath = "//input[data-test=\"password\"]")
+    @FindBy(xpath = "//input[@data-test='password']")
     private WebElement passwordInput;
 
     @FindBy(xpath = "//button[@data-test=\"login-button\"]")
@@ -26,11 +26,11 @@ public class LoginSwagLabPage extends BasePage {
     public void inputUsername(String username) {
 //        Assert.assertTrue("Campo username esta disponible",esperarElemento(usernameInput,10));
         if (esperarElemento(usernameInput,10)){
-            BasePage.test.log(Status.PASS,"Campo username esta disponible");
-            BasePage.test.log(Status.INFO,"INFO: Campo username esta disponible");
+//            BasePage.test.log(Status.PASS,"Campo username esta disponible");
+//            BasePage.test.log(Status.INFO,"INFO: Campo username esta disponible");
         }else {
-            BasePage.test.log(Status.PASS,"Campo username NO esta disponible");
-            BasePage.test.log(Status.INFO,"Campo username NO esta disponible");
+//            BasePage.test.log(Status.PASS,"Campo username NO esta disponible");
+//            BasePage.test.log(Status.INFO,"Campo username NO esta disponible");
         }
         typeInput(usernameInput, username);
     }
