@@ -4,23 +4,19 @@ import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import selenium.utils.browser_manager.DriverManager;
-import selenium.utils.browser_manager.DriverManagerFactory;
-import selenium.utils.browser_manager.DriverType;
+import selenium.utils.browser_manager.WebDriverFactory;
 
 public class Hooks {
     public static WebDriver driver;
-    public DriverManager driverManager;
     public static String Tag_ID_Running;
 
     @Before
     public void setup() {
-        driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
-        driver = driverManager.getDriver();;
+        String browser = System.getProperty("browser", "chrome"); // Por defecto, usa Chrome
+        driver = WebDriverFactory.createWebDriver(browser);
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
     }
-
     @AfterStep
     public static void takeScreenshot(Scenario scenario) {
         if (driver instanceof TakesScreenshot) {
@@ -38,7 +34,7 @@ public class Hooks {
     @After
     public void tearDown() {
         if (driver != null) {
-            driverManager.quitDriver();
+            driver.quit();
         }
     }
 

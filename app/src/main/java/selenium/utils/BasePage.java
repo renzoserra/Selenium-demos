@@ -13,8 +13,6 @@ public class BasePage {
     private static WebDriver driver;
     private static WebDriverWait wait;
     public static ExtentTest test;
-
-
     public BasePage() {
             this.driver = Hooks.getDriver();
     }
