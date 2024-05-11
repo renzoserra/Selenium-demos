@@ -10,10 +10,10 @@ import io.cucumber.junit.CucumberOptions;
     features = "src\\main\\java\\selenium\\feature",
     glue = "selenium/steps",
     publish = true,
-    plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:","html:target/cucumber.html"},
+    plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
     snippets = CucumberOptions.SnippetType.CAMELCASE,
     monochrome = true,
-    tags = "@swagLab"
+    tags = "@orangehrm"
 )
 
 
