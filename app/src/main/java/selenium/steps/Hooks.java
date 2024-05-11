@@ -9,12 +9,12 @@ import selenium.utils.browser_manager.WebDriverFactory;
 public class Hooks {
     public static WebDriver driver;
     public static String Tag_ID_Running;
-
+    String browser = "chromegithubactions";
     @Before
     public void setup() {
-        String browser = System.getProperty("browser", "chrome"); // Por defecto, usa Chrome
+//        String browser = System.getProperty("browser", "chrome"); // Por defecto, usa Chrome
         driver = WebDriverFactory.createWebDriver(browser);
-        driver.get("https://www.saucedemo.com/");
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
         driver.manage().window().maximize();
     }
     @AfterStep
@@ -33,6 +33,9 @@ public class Hooks {
     }
     @After
     public void tearDown() {
+        if (browser.contains("githubactions")){
+            return;
+        }
         if (driver != null) {
             driver.quit();
         }

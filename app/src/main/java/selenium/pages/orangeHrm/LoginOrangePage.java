@@ -20,8 +20,7 @@ public class LoginOrangePage extends BasePage {
     private WebElement loginButton;
 
     public void inputUserPass(String username, String pass){
-        Assert.assertFalse("Campo username esta disponible",esperarElemento(usernameInput,10));
-        BasePage.test.log(Status.FAIL,"Campo username esta disponible");
+        Assert.assertTrue("Campo username esta disponible",esperarElemento(usernameInput,10));
         Assert.assertTrue(esperarElemento(usernameInput,10));
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(pass);

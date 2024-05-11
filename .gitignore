@@ -5,3 +5,4 @@
 build
 tokens/*
 app/src/main/resources/credentials.json
+.idea/*
