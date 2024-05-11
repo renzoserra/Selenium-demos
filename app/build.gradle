@@ -37,3 +37,18 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task cucumberTest(type: Test) {
+    dependsOn testClasses
+
+    doFirst {
+        // Asegúrate de que la carpeta para los reportes exista
+        file("$buildDir/cucumberReports").mkdirs()
+    }
+    systemProperty 'cucumber.publish.quiet', 'true'
+    systemProperty 'cucumber.features', 'src/main/java/selenium/feature'
+    systemProperty 'cucumber.glue', 'selenium.steps'
+    systemProperty 'cucumber.plugin', 'pretty,html:build/cucumberReports'
+    systemProperty 'cucumber.monochrome', 'true'
+    systemProperty 'cucumber.tags', '@orangehrm'
+}
