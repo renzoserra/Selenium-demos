@@ -29,4 +29,4 @@ jobs:
 
       - name: Run Selenium & Cucumber Tests
         run: |
-          ./gradlew cucumberTest
+          ./gradlew cucumber

@@ -18,19 +18,15 @@ repositories {
 dependencies {
     // Dependencias de Selenium
 // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.10.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.20.0'
     // Dependencias de Cucumber
-    implementation 'io.cucumber:cucumber-java:7.11.1'
-    implementation 'io.cucumber:cucumber-junit:7.11.1'
+    implementation 'io.cucumber:cucumber-java:7.17.0'
+    implementation 'io.cucumber:cucumber-junit:7.17.0'
     testImplementation 'junit:junit:4.13.2'
 // https://mvnrepository.com/artifact/com.aventstack/extentreports
     implementation 'com.aventstack:extentreports:5.1.1'
 // https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter
     implementation 'tech.grasshopper:extentreports-cucumber7-adapter:1.14.0'
-
-    implementation 'com.google.api-client:google-api-client:2.0.0'
-    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.34.1'
-    implementation 'com.google.apis:google-api-services-sheets:v4-rev20220927-2.0.0'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
 
@@ -57,3 +53,20 @@ task cucumberTest(type: Test) {
     systemProperty 'cucumber.monochrome', 'true'
     systemProperty 'cucumber.tags', '@orangehrm'
 }
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.testRuntimeClasspath
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:',
+                    '--glue', 'selenium.steps', // Ruta al paquete de definiciones de pasos
+                    '--tags', '@orangehrm',
+                    'src\\main\\java\\selenium\\feature' // Ruta al directorio de características
+            ]
+        }
+    }
+}
+
